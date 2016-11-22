@@ -1,0 +1,29 @@
+.field{
+	width: 14px;
+	height: 14px;
+
+}
+#container{
+    border-collapse: collapse;
+    border-spacing: 0;
+    cursor: pointer;
+}
+#toolbar{
+	height: 20px;
+	margin: 10px;
+}
+.toolbarBlockContainer{
+	width: 16px;
+	height: 16px;
+	float: left;
+	padding: 10px;
+	cursor: pointer;
+	text-align: center;
+}
+.toolbarBlockSelected{
+	background: gray;
+}
+.toolbarBlock{
+	width: 16px;
+	height: 16px;
+}
