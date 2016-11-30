@@ -4,7 +4,6 @@ class CreeperBlock extends BlockBase{
 
     this.texture = 'creeper';
     this.type = 'creeper';
-    this.status = 'normal';
     this.transparent = false;
   }
 
@@ -12,75 +11,7 @@ class CreeperBlock extends BlockBase{
 	  this.spreedCreeper();
   }
 
-  getDeath(){
-    this.texture = 'damaged_creeper';
-    this.status = 'damaged';
-
-    mapController.renderBlock(this.x, this.y);
-
-    setTimeout(this.giveDeath.bind(this), 50);
-  }
-
-  cure(){
-    this.texture = 'creeper';
-    this.status = 'normal';
-
-    mapController.renderBlock(this.x, this.y);
-  }
-
-  giveDeath(){
-    var count = this.countNearCreeper();
-    if(count % 2 == 1 || count == 0){
-      this.toAir();
-      return true;
-    }
-
-    var nearCreepers = this.getNearCreeper();
-    var which = random(0, nearCreepers.length - 1);
-
-    nearCreepers[which].getDeath();
-    this.cure();
-  }
-
-  getNearCreeper(){
-    var creepers = [];
-    var coords = [{x: this.x, y: this.y + 1},
-                  {x: this.x + 1, y: this.y},
-                  {x: this.x, y: this.y - 1},
-                  {x: this.x - 1, y: this.y}]
-
-    var i = coords.length;
-    while(i--){
-      let checkedBlock = mapController.getBlock(coords[i].x, coords[i].y);
-      if(checkedBlock.type == 'creeper' && checkedBlock.status == 'normal'){
-        creepers.push(checkedBlock)
-      }
-    }
-    return creepers;
-  }
-
-  countNearCreeper(){
-    var count = 0;
-    var coords = [{x: this.x, y: this.y + 1},
-                  {x: this.x + 1, y: this.y},
-                  {x: this.x, y: this.y - 1},
-                  {x: this.x - 1, y: this.y}]
-
-    var i = coords.length;
-    while(i--){
-      let checkedBlock = mapController.getBlock(coords[i].x, coords[i].y);
-      if(checkedBlock.type == 'creeper'){
-        count++;
-      }
-    }
-    return count;
-  }
-
   destroy(){
-    this.getDeath();
-  }
-
-  toAir(){
     mapController.changeBlockByTypeAndCoords(this.x, this.y, new AirBlock());
   }
 
