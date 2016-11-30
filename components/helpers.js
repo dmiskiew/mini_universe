@@ -15,3 +15,14 @@ function randomIn(array){
 function getChance(chance){
 	return Math.random() <= chance;
 }
+
+function loadTexture(path){
+  var img = new Image();
+  img.src = path;
+  return img;
+}
+
+function setTexture($element, name){
+  var url = "url(" + TEXTURES_PATH + name + ".bmp)";
+  $element.css('background', url);
+}

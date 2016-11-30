@@ -1,9 +1,12 @@
-class DirtBlock extends BlockBase{
+class DirtItem extends ItemBase{
   constructor(){
     super(...arguments);
 
     this.texture = 'dirt';
     this.type = 'dirt';
-    this.transparent = false;
   }
-}
+
+  returnNewBlock(){
+    return new DirtBlock();
+  }
+};

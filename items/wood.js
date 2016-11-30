@@ -1,9 +1,12 @@
-class WoodBlock extends BlockBase{
+class WoodItem extends ItemBase{
   constructor(){
     super(...arguments);
 
     this.texture = 'wood';
     this.type = 'wood';
-    this.transparent = false;
   }
-};
+
+  returnNewBlock(){
+    return new WoodBlock();
+  }
+}

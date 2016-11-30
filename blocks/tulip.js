@@ -1,40 +1,43 @@
-var TulipBlock = function(){
-  this.type = 'tulip';
-  this.transparent = true;
-};
+class TulipBlock extends BlockBase{
+  constructor(){
+    super(...arguments);
 
-TulipBlock.prototype.checkDownForGrass = function(){
-	var downBlock = mapController.getBlock(this.x, this.y - 1);
-	if(downBlock.type != 'grass'){
-	  mapController.getPiece(this.x, this.y).setBlock(new AirBlock());
-		return false;
-	}
-	return true;
-};
+    this.texture = 'tulip';
+    this.type = 'tulip';
+    this.transparent = true;
+  }
 
-TulipBlock.prototype.checkForGrowingFlower = function(){
-	var i = FLOWER_GROWING_ATTEMPTS;
+  active(){
+	  if(this.checkDownForGrass()){
+	    this.checkForGrowingFlower();
+	  }
+  }
 
-	while(i > 0){
-		var x = this.x + random(-4, 4);
-		var y = this.y + random(-4, 4);
+  checkDownForGrass(){
+	  var downBlock = mapController.getBlock(this.x, this.y - 1);
+	  if(downBlock.type != 'grass'){
+	    mapController.getPiece(this.x, this.y).setBlock(new AirBlock());
+		  return false;
+	  }
+	  return true;
+  }
 
-		var checkedBlock = mapController.getBlock(x, y);
-		var upCheckedBlock = mapController.getBlock(x, y + 1);
+  checkForGrowingFlower(){
+	  var i = FLOWER_GROWING_ATTEMPTS;
 
-		if(checkedBlock.type == 'grass' && upCheckedBlock.type == 'air'){
-			mapController.getPiece(x, y + 1).setBlock(new TulipBlock());
-			return;
-		}
+	  while(i > 0){
+		  var x = this.x + random(-4, 4);
+		  var y = this.y + random(-4, 4);
 
-		i--;
-	}
-};
+		  var checkedBlock = mapController.getBlock(x, y);
+		  var upCheckedBlock = mapController.getBlock(x, y + 1);
 
-TulipBlock.prototype.active = function(){
-	if(this.checkDownForGrass()){
-	  this.checkForGrowingFlower();
-	}
-};
+		  if(checkedBlock.type == 'grass' && upCheckedBlock.type == 'air'){
+			  mapController.getPiece(x, y + 1).setBlock(new TulipBlock());
+			  return;
+		  }
 
-
+		  i--;
+	  }
+  }
+}

@@ -1,4 +1,9 @@
-var PlantBlock = function(){
-  this.type = 'plant';
-  this.transparent = true;
+class PlantBlock extends BlockBase{
+  constructor(){
+    super(...arguments);
+
+    this.texture = 'plant';
+    this.type = 'plant';
+    this.transparent = true;
+  }
 };

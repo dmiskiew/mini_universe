@@ -13,75 +13,66 @@ var interfaceController = new(function(){
  	};
 
  	this.createStacks = function(){
- 	  that.toolbarBlocks.push(new Stack(new Hand(), 1));
- 	  that.toolbarBlocks.push(new Stack(new DirtBlock(), 64));
- 	  that.toolbarBlocks.push(new Stack(new WoodBlock(), 64));
- 	  that.toolbarBlocks.push(new Stack(new TulipBlock(), 1));
- 	  that.toolbarBlocks.push(new Stack(new CreeperBlock(), 1));
- 	  that.toolbarBlocks.push(new Stack(new QuartzBlock(), 1));
+ 	  that.toolbarBlocks.push(new Hand());
+    that.toolbarBlocks.push(new GrassItem(1));
+ 	  that.toolbarBlocks.push(new DirtItem(64));
+ 	  that.toolbarBlocks.push(new WoodItem(64));
+ 	  that.toolbarBlocks.push(new TulipItem());
+ 	  that.toolbarBlocks.push(new CreeperItem());
+ 	  that.toolbarBlocks.push(new QuartzItem());
  	};
 
  	this.handleMap = function(){
- 		document.body.onmousedown = function(event){
- 			var target = event.target;
- 			if(target.className != 'field'){
- 				return;
- 			}
- 			var id = target.id;
+ 		$('body').on('mousedown', '.field', function(event){
+ 			var $target = $(event.target);
+ 			var id = $target.attr('id');
  			id = id.split('_');
 
- 			var stack = that.toolbarBlocks[that.selectedBlock];
+ 			var item = that.toolbarBlocks[that.selectedBlock];
+      item.use(id[0], id[1]);
 
- 			if(stack.getOne()){
-   			var className = stack.item.type.capitalize() + 'Block';
-   			mapController.changeBlockByTypeAndCoords(id[1], id[0], new window[className]());
-   			that.renderToolbar();
- 			}
-
- 		};
+      that.renderToolbar();
+ 		});
 
  	};
 
 	this.handleToolbar = function(){
- 		document.querySelector('#toolbar').onmousedown = function(event){
- 			var target = event.target;
- 			if(!target.classList.contains('blockSelectClickable')){
- 				return;
- 			}
+ 		$('body').on('mousedown', '.toolbarBlockContainer', function(event){
+ 			var $target = $(event.currentTarget);
  			
- 			that.selectedBlock = target.getAttribute('number');
+ 			that.selectedBlock = $target.attr('number');
  			that.renderToolbar();
-
- 		};
-
+ 		});
  	};
 
  	this.renderToolbar = function(){
- 		var toolbar = document.querySelector('#toolbar');
- 		toolbar.innerHTML = '';
+ 		var $toolbar = $('#toolbar');
+ 		$toolbar.empty();
 
  		var i = 0;
  		var max = that.toolbarBlocks.length;
 
  		while(i < max){
- 			var container = document.createElement('div');
- 			container.className = 'toolbarBlockContainer blockSelectClickable';
- 			container.setAttribute('number', i);
+ 			let $container = $('<div>');
+ 			$container.attr('class', 'toolbarBlockContainer blockSelectClickable')
+ 			$container.attr('number', i);
 
  			if(that.selectedBlock == i){
- 				container.classList.add('toolbarBlockSelected');
+ 				$container.addClass('toolbarBlockSelected');
  			}
 
-			var block = document.createElement('div');
-			block.className = 'toolbarBlock blockSelectClickable';
-			block.setAttribute('number', i);
-			block.style.backgroundImage = "url(" + TEXTURES_PATH + that.toolbarBlocks[i].item.type + ".bmp)";
-			container.appendChild(block);
+      let $block = $('<div>');
+      setTexture($block, that.toolbarBlocks[i].texture)
+			$block.attr('class', 'toolbarBlock')
 
-			var text = document.createTextNode(that.toolbarBlocks[i].quantity);
-			container.appendChild(text);
+			$container.append($block);
+
+      if(that.toolbarBlocks[i].quantity){
+			  let $quantityEl = $('<div>' + that.toolbarBlocks[i].quantity + '</div>');
+			  $container.append($quantityEl);
+      }
 			
-			toolbar.appendChild(container);
+			$toolbar.append($container);
 
  			i++
  		}

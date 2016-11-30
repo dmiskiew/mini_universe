@@ -1,10 +1,12 @@
-class QuartzBlock extends BlockBase{
+class QuartzItem extends ItemBase{
   constructor(){
     super(...arguments);
 
     this.texture = 'quartz';
     this.type = 'quartz';
-    this.transparent = false;
-    this.creeperProof = true;
   }
-};
+
+  returnNewBlock(){
+    return new QuartzBlock();
+  }
+}

@@ -1,8 +1,9 @@
 var mapController = new (function(){
 	var that = this;
 
-	that.container = MAP_HTML_CONTAINER;
+	that.$container = MAP_HTML_CONTAINER;
 	that.map;
+	that.errorBlock = new NoneBlock();
 
 	var mapWidth;
 	var mapHeight;
@@ -10,6 +11,10 @@ var mapController = new (function(){
 	this.updateBlock = function(block){
 		that.map[block.x][block.y].setBlock(block);
 		that.map[block.x][block.y].renderBlock()
+	};
+
+	this.renderBlock = function(x, y){
+		that.map[x][y].renderBlock()
 	};
 
 	this.changeBlockByTypeAndCoords = function(x, y, block){
@@ -22,12 +27,11 @@ var mapController = new (function(){
 	};
 
 	this.getBlock = function(x, y){
-		var error = new NoneBlock();
 		if(x < 0 || y < 0){
-			return error;
+			return that.errorBlock;
 		}
 		if(x >= mapWidth || y >= mapHeight){
-			return error;
+			return that.errorBlock;
 		}
 
 		return that.map[x][y].block;
@@ -51,7 +55,7 @@ var mapController = new (function(){
 	};
 
 	this.createMapArrayAndHtml = function(width, height){
-	  that.container.innerHTML = '';
+	  that.$container.empty();
 		that.map = [];
 
     // initiate map array with another arrays
@@ -63,21 +67,21 @@ var mapController = new (function(){
 
 		i = height - 1;
 		while(i >= 0){
-		  var tr = document.createElement('tr');
+		  let $tr = $('<tr>');
 
 			var j = 0;
 			while(j < width){
-			  var td = document.createElement('td');
-			  td.className = 'field';
-				td.id = i + '_' + j
+			  let $td = $('<td>');
+			  $td.attr('class', 'field');
+				$td.attr('id', j + '_' + i);
 
-				tr.appendChild(td);
+				$tr.append($td);
 				
-				that.map[j][i] = new MapPiece(j, i, new AirBlock(), td);
+				that.map[j][i] = new MapPiece(j, i, new AirBlock(), $td);
 				j++;
 			}
 
-			that.container.appendChild(tr);
+			that.$container.append($tr);
 			i--;
 		}
 

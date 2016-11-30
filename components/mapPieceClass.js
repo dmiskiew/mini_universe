@@ -1,12 +1,12 @@
-var MapPiece = function(x, y, block, html){
+var MapPiece = function(x, y, block, $html){
   this.x = x;
   this.y = y;
-  this.html = html;
+  this.$html = $html;
   this.setBlock(block);
 };
 
 MapPiece.prototype.renderBlock = function(){
-  this.html.style.backgroundImage = "url(" + TEXTURES_PATH + this.block.type + ".bmp)";
+  setTexture(this.$html, this.block.texture);
 };
 
 MapPiece.prototype.setBlock = function(block){

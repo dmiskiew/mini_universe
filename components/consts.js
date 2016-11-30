@@ -1,6 +1,6 @@
 const TEXTURES_PATH = './textures/';
 
-const MAP_HTML_CONTAINER = document.querySelector('#container');
+const MAP_HTML_CONTAINER = $('#container');
 
 const DELAY_TIME = 33;
 const BLOCKS_PER_TICK = 10;
