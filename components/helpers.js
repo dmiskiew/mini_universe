@@ -23,6 +23,7 @@ function loadTexture(path){
 }
 
 function setTexture($element, name){
-  var url = "url(" + TEXTURES_PATH + name + ".bmp)";
+  var url = "url(" + TEXTURES_PATH + name + ".png),";
+  url += "url(" + TEXTURES_PATH + "air.png)";
   $element.css('background', url);
 }

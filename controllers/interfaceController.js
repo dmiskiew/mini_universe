@@ -2,6 +2,7 @@ var interfaceController = new(function(){
  	var that = this;
 
 	this.selectedBlock = 0;
+	this.dataBlock = {};
 	this.toolbarBlocks = [];
 
  	this.initialize = function(){
@@ -13,17 +14,19 @@ var interfaceController = new(function(){
  	};
 
  	this.createStacks = function(){
- 	  that.toolbarBlocks.push(new Hand());
-    that.toolbarBlocks.push(new GrassItem(1));
- 	  that.toolbarBlocks.push(new DirtItem(64));
- 	  that.toolbarBlocks.push(new WoodItem(64));
- 	  that.toolbarBlocks.push(new TulipItem());
- 	  that.toolbarBlocks.push(new CreeperItem());
- 	  that.toolbarBlocks.push(new QuartzItem());
+		that.toolbarBlocks.push(new Hand());
+		that.toolbarBlocks.push(new GrassItem(1));
+		that.toolbarBlocks.push(new DirtItem(64));
+		that.toolbarBlocks.push(new BigLogItem(64));
+		that.toolbarBlocks.push(new LeavesItem(64));
+		that.toolbarBlocks.push(new TulipItem());
+		that.toolbarBlocks.push(new PlantItem(3));
+		that.toolbarBlocks.push(new CreeperItem());
+		that.toolbarBlocks.push(new QuartzItem());
  	};
 
  	this.handleMap = function(){
- 		$('body').on('mousedown', '.field', function(event){
+		$('body').on('mousedown', '.field', function(event){
  			var $target = $(event.target);
  			var id = $target.attr('id');
  			id = id.split('_');
@@ -34,6 +37,29 @@ var interfaceController = new(function(){
       that.renderToolbar();
  		});
 
+		$('body').on('mousemove', '.field', function(event){
+ 			var $target = $(event.currentTarget);
+ 			var id = $target.attr('id');
+ 			id = id.split('_');
+
+			that.dataBlock = mapController.getBlock(id[0], id[1]);
+
+			that.renderBlockData();
+ 		});
+ 	};
+
+	this.renderBlockData = function(){
+		var $container = $('#data');
+
+		$container.empty();
+
+		$container.append('<div>{</div>');
+
+		for (key in that.dataBlock) {
+				$container.append('<div>' + key + ': ' + that.dataBlock[key] + '</div>');
+		}
+
+		$container.append('<div>}</div>');
  	};
 
 	this.handleToolbar = function(){
