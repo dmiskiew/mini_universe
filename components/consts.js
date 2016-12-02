@@ -3,7 +3,7 @@ const TEXTURES_PATH = './textures/';
 const MAP_HTML_CONTAINER = $('#container');
 
 const DELAY_TIME = 33;
-const BLOCKS_PER_TICK = 100;
+const BLOCKS_PER_TICK = 10;
 
 const FLOWER_ON_GRASS_CHANCE = 0.05;
 const GRASS_GROWING_ATTEMPTS = 10;
