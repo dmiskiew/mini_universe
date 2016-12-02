@@ -6,7 +6,7 @@ class PlantBlock extends BlockBase{
     this.type = 'plant';
     this.transparent = true;
     this.growPhase = 0;
-    this.toTree = 10;
+    this.toTree = 2;
   }
 
   active(){
@@ -32,6 +32,6 @@ class PlantBlock extends BlockBase{
   }
 
   growToTree(){
-    mapController.changeBlockByTypeAndCoords(this.x, this.y, new LogWithLeavesBlock());
+    mapController.changeBlockByTypeAndCoords(this.x, this.y, new BranchBlock());
   }
 };

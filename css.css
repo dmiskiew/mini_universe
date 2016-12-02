@@ -3,6 +3,11 @@
 	height: 14px;
 
 }
+#data{
+	position: absolute;
+	left: 75%;
+	top: 100px;
+}
 #container{
     border-collapse: collapse;
     border-spacing: 0;

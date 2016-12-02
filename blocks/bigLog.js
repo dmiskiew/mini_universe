@@ -8,8 +8,12 @@ class BigLogBlock extends TreeBase{
 
     this.tree = true;
 
-    this.energy = 4;
-    this.energyProduction = 0;
-    this.energyConsumption = 1; 
+    this.energy = BIG_LOG_STARTING_ENERGY;
+    this.energyProduction = BIG_LOG_ENERGY_PRODUCTON;
+    this.energyConsumption = BIG_LOG_ENERGY_CONSUMPTION; 
+
+    this.overload = BIG_LOG_STARTING_OVERLOAD;
+    this.overloadCreation = BIG_LOG_OVERLOAD_CREATION;
+    this.overloadReduction =BIG_LOG_OVERLOAD_REDUCTION;
   }
 };

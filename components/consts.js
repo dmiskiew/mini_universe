@@ -3,16 +3,67 @@ const TEXTURES_PATH = './textures/';
 const MAP_HTML_CONTAINER = $('#container');
 
 const DELAY_TIME = 33;
-const BLOCKS_PER_TICK = 10;
+const BLOCKS_PER_TICK = 100;
 
 const FLOWER_ON_GRASS_CHANCE = 0.05;
 const GRASS_GROWING_ATTEMPTS = 10;
 const FLOWER_GROWING_ATTEMPTS = 10;
 const CREEPER_GROWING_ATTEMPTS = 5;
 
-const TREE_STRUC = [['all', 'leaves', 'leaves', 'leaves', 'all'],
-                    ['leaves', 'leaves', 'leaves','leaves', 'leaves'],
-                    ['leaves', 'leaves', 'wood','leaves', 'leaves'],
-                    ['leaves', 'leaves', 'wood','leaves', 'leaves'],
-                    ['all', 'all', 'wood', 'all', 'all'],
-                    ['all', 'all', 'wood', 'all', 'all']]
+
+// TREE
+
+const TREE_OVERLOAD_MAX = 1000;
+const TREE_OVERLOAD_LOCK_VALUE = 900;
+const TREE_OVERLOAD_MAX_TRANSFER = 5;
+const TREE_ENERGY_MAX_TRANSFER = 15;
+const LEAVES_CREATION_ENERGY_COST = 300;
+
+// LEAVES
+
+const LEAVES_STARTING_ENERGY = 5;
+const LEAVES_ENERGY_PRODUCTON = 20;
+const LEAVES_ENERGY_CONSUMPTION = 5;
+
+const LEAVES_STARTING_OVERLOAD = 100;
+const LEAVES_OVERLOAD_CREATION = 20;
+const LEAVES_OVERLOAD_REDUCTION = 0;
+
+const LEAVES_UPDATE_OVERLOAD_NEED = 400;
+const LEAVES_UPDATE_ENERGY_NEED = 150;
+
+// BRANCH
+
+const BRANCH_STARTING_ENERGY = 5;
+const BRANCH_ENERGY_PRODUCTON = 15;
+const BRANCH_ENERGY_CONSUMPTION = 5;
+
+const BRANCH_STARTING_OVERLOAD = 100;
+const BRANCH_OVERLOAD_CREATION = 10;
+const BRANCH_OVERLOAD_REDUCTION = 8;
+
+const BRANCH_UPDATE_OVERLOAD_NEED = 400;
+const BRANCH_UPDATE_ENERGY_NEED = 100;
+
+// LOG
+
+const LOG_STARTING_ENERGY = 4;
+const LOG_ENERGY_PRODUCTON = 0;
+const LOG_ENERGY_CONSUMPTION = 1;
+
+const LOG_STARTING_OVERLOAD = 100;
+const LOG_OVERLOAD_CREATION = 0;
+const LOG_OVERLOAD_REDUCTION = 2;
+
+const LOG_UPDATE_OVERLOAD_NEED = 800;
+const LOG_UPDATE_ENERGY_NEED = 75;
+
+// BIG LOG
+
+const BIG_LOG_STARTING_ENERGY = 4;
+const BIG_LOG_ENERGY_PRODUCTON = 0;
+const BIG_LOG_ENERGY_CONSUMPTION = 1;
+
+const BIG_LOG_STARTING_OVERLOAD = 100;
+const BIG_LOG_OVERLOAD_CREATION = 0;
+const BIG_LOG_OVERLOAD_REDUCTION = 3;

@@ -4,7 +4,7 @@ var gameController = new(function(){
 
 	this.initialize = function(){
 	
-		mapController.createMapContainer(40, 20);
+		mapController.createMapContainer(40, 30);
 		mapController.generateDirt();
 		mapController.generateStone();
 		mapController.generateGrass();

@@ -20,7 +20,7 @@ var interfaceController = new(function(){
 		that.toolbarBlocks.push(new BigLogItem(64));
 		that.toolbarBlocks.push(new LeavesItem(64));
 		that.toolbarBlocks.push(new TulipItem());
-		that.toolbarBlocks.push(new PlantItem(3));
+		that.toolbarBlocks.push(new PlantItem(30));
 		that.toolbarBlocks.push(new CreeperItem());
 		that.toolbarBlocks.push(new QuartzItem());
  	};

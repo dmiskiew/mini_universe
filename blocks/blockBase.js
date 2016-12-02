@@ -18,4 +18,20 @@ class BlockBase{
     mapController.changeBlockByTypeAndCoords(this.x, this.y, new AirBlock());
   }
 
+  getDownBlock(){
+    return mapController.getBlock(this.x, this.y - 1);
+  }
+
+  getUpBlock(){
+    return mapController.getBlock(this.x, this.y + 1);
+  }
+
+  getLeftBlock(){
+    return mapController.getBlock(this.x - 1, this.y);
+  }
+
+  getRightBlock(){
+    return mapController.getBlock(this.x + 1, this.y);
+  }
+
 };
