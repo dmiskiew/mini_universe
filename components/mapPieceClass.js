@@ -13,8 +13,6 @@ MapPiece.prototype.setBlock = function(block){
   this.block = block;
   block.x = this.x;
   block.y = this.y;
-
-  this.renderBlock();
 };
 
 MapPiece.prototype.setBlockType = function(type){
